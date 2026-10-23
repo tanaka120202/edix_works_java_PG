@@ -1,7 +1,7 @@
 public class Item { // Itemというクラス（プログラムのまとまり）を作ります。
     public static void main(String[] args) { // 実行すると、ここから処理が始まります。
         String title = "javaの学習"; // String型（文字列を扱う種類）の変数（値を入れる箱）titleに文字を入れます。
-        String html = "<li>" + title + "</li>; // +で文字列をつなぎ、HTML（Webページの書き方）のリスト項目を作ります。
+        String html = "<li>" + title + "</li>"; // +で文字列をつなぎ、HTML（Webページの書き方）のリスト項目を作ります。
         boolean done = false;
         int count = 3;
 
