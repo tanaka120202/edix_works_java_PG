@@ -1,5 +1,6 @@
 import com.sun.net.httpserver.HttpServer; // Webサーバーを使います。
 import java.net.InetSocketAddress; // 待ち受けるポート番号を指定します。
+import java.net.URLDecoder; // URLで変換された文字を元に戻します。
 
 public class App { // Appクラスを定義します。
     public static void main(String[] args) throws Exception { // Javaが最初に実行する場所です。
@@ -7,8 +8,11 @@ public class App { // Appクラスを定義します。
         server.createContext("/", exchange -> { // "/"へのアクセスを処理します。[毎]☆
             String path = exchange.getRequestURI().getPath(); // アクセスされたパスを取り出します。
             String message;
-            if (path == "/hello") { // パスが「/hello」か比べます。
-                message = "こんにちは！";
+            if (path.equals("/hello")) { // パスが「/hello」か比べます。
+                String query = exchange.getRequestURI().getRawQuery(); // URLのクエリ部分を取り出します。
+                String name = query.substring(5); // 「name=」の後ろを切り出します。
+                name = URLDecoder.decode(name, "UTF-8"); // URL表記をUTF-8の文字に戻します。
+                message = "こんにちは、" + name + "さん！"; // 名前を挨拶に混ぜます。
             } else if (path.equals("/bye")) { // パスが「/bye」か比べます。
                 message = "さようなら！";
             } else if (path.equals("/mane")) { // パスが「/bye」か比べます。
